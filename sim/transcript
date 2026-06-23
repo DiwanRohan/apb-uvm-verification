@@ -1,0 +1,10 @@
+# do compile.do
+# Cannot open macro file: compile.do
+#  vsim -voptargs=+acc +UVM_TESTNAME=apb_sanity_test work.apb_tb_top
+# vsim -voptargs="+acc" "+UVM_TESTNAME=apb_sanity_test" work.apb_tb_top 
+# Start time: 22:43:24 on Jun 23,2026
+# ** Error (suppressible): (vsim-19) Failed to access library 'work' at "work".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 22:43:24 on Jun 23,2026, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
