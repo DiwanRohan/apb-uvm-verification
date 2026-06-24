@@ -22,7 +22,8 @@ apb_test
     │   └── mon_h
     ├── slv_agent_h (UVM_PASSIVE)
     │   └── mon_h
-    └── scoreboard_h
+    ├── scoreboard_h
+    └── cov
 ```
 
 The slave agent is deliberately passive: it observes DUT responses but never drives the bus and therefore has no sequencer or driver.
@@ -30,7 +31,7 @@ The slave agent is deliberately passive: it observes DUT responses but never dri
 ## Implemented checks
 
 - APB read and write transfers
-- Two-cycle wait-state handling
+- Address-dependent wait-state handling (0, 1, 3, 12 cycles)
 - Valid and out-of-range address responses
 - `PSLVERR` checking
 - Master/slave monitor agreement
