@@ -13,6 +13,8 @@ vlog -cover sbect -sv -timescale 1ns/1ps -L mtiUvm \
   +incdir+../tb \
   +incdir+../tb/interfaces \
   +incdir+../tb/agents \
+  +incdir+../tb/agents/apb_master_agent \
+  +incdir+../tb/agents/apb_slave_agent \
   +incdir+../tb/sequences \
   +incdir+../tb/env \
   +incdir+../tb/tests \
