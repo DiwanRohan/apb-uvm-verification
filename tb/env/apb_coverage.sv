@@ -188,13 +188,15 @@ class apb_coverage extends uvm_subscriber #(apb_mas_seq_item);
   // -----------------------------------------------------------------------
   function void report();
     `uvm_info("COV_REPORT", $sformatf(
-      "\n======================================\n"
-      "  FUNCTIONAL COVERAGE = %0.2f %%\n"
-      "  Transfer coverage   = %0.2f %%\n"
-      "  Write data coverage = %0.2f %%\n"
-      "  Read  data coverage = %0.2f %%\n"
-      "  Samples total/write/read = %0d/%0d/%0d\n"
-      "======================================",
+      {
+        "\n======================================\n",
+        "  FUNCTIONAL COVERAGE = %0.2f %%\n",
+        "  Transfer coverage   = %0.2f %%\n",
+        "  Write data coverage = %0.2f %%\n",
+        "  Read  data coverage = %0.2f %%\n",
+        "  Samples total/write/read = %0d/%0d/%0d\n",
+        "======================================"
+      },
       get_functional_coverage(),
       apb_transfer_cg.get_coverage(),
       apb_write_data_cg.get_coverage(),

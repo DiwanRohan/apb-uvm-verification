@@ -59,7 +59,6 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
 
     // Record wait count and response in the item once, after completion.
     trans.wait_cycles = w_cnt;
-    trans.pready      = vif.mas_drv_cb.pready;
     trans.pslverr     = vif.mas_drv_cb.pslverr;
     trans.prdata      = vif.mas_drv_cb.prdata;
 

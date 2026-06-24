@@ -11,4 +11,5 @@ package apb_test_pkg;
   `include "apb_write_test.sv"
   `include "apb_read_test.sv"
   `include "apb_random_test.sv"
+  `include "apb_waitstate_test.sv"
 endpackage

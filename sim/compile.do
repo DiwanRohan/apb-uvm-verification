@@ -8,7 +8,7 @@ set QUESTA_ROOT [file normalize [file join [file dirname [info nameofexecutable]
 set UVM_HOME [file join $QUESTA_ROOT verilog_src uvm-1.2 src]
 vmap mtiUvm [file join $QUESTA_ROOT uvm-1.2]
 
-vlog -sv -timescale 1ns/1ps -L mtiUvm \
+vlog -cover sbect -sv -timescale 1ns/1ps -L mtiUvm \
   +incdir+$UVM_HOME \
   +incdir+../tb \
   +incdir+../tb/interfaces \

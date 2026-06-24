@@ -1,0 +1,2 @@
+# Verible linter rules
+line-length=length:200

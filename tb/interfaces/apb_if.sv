@@ -5,12 +5,12 @@
 
 interface apb_if(input logic pclk);
 
-  logic                   prstn;
-  logic                   psel;
-  logic                   penable;
-  logic                   pwrite;
-  logic [`ADDR_WIDTH-1:0] paddr;
-  logic [`DATA_WIDTH-1:0] pwdata;
+  logic                   prstn = 1'b0;
+  logic                   psel = 1'b0;
+  logic                   penable = 1'b0;
+  logic                   pwrite = 1'b0;
+  logic [`ADDR_WIDTH-1:0] paddr = '0;
+  logic [`DATA_WIDTH-1:0] pwdata = '0;
   logic [`DATA_WIDTH-1:0] prdata;
   logic                   pready;
   logic                   pslverr;
@@ -29,8 +29,6 @@ interface apb_if(input logic pclk);
   endclocking
 
   modport MAS_DRV_MP(clocking mas_drv_cb);
-  modport MAS_MON_MP(clocking mon_cb);
-  modport SLV_MON_MP(clocking mon_cb);
 
 endinterface
 

@@ -45,7 +45,6 @@ class apb_base_mon #(type T = apb_seq_item_base) extends uvm_monitor;
 
     // Transfer completed normally — capture response fields.
     if (vif.mon_cb.psel && vif.mon_cb.penable) begin
-      item.pready  = vif.mon_cb.pready;
       item.pslverr = vif.mon_cb.pslverr;
       item.prdata  = vif.mon_cb.prdata;
       item_collect_port.write(item);

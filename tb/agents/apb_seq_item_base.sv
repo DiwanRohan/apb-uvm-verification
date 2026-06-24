@@ -11,7 +11,6 @@ class apb_seq_item_base extends uvm_sequence_item;
 
   // Response / output fields - populated by the driver/monitor, never rand.
   bit [`DATA_WIDTH-1:0]      prdata;      // Read data returned by DUT
-  bit                        pready;      // PREADY sampled at transfer completion
   bit                        pslverr;     // PSLVERR sampled at transfer completion
   int unsigned               wait_cycles; // Number of PREADY=0 cycles observed
 
@@ -20,7 +19,6 @@ class apb_seq_item_base extends uvm_sequence_item;
     `uvm_field_int (paddr,                    UVM_ALL_ON)
     `uvm_field_int (pwdata,                   UVM_ALL_ON)
     `uvm_field_int (prdata,                   UVM_ALL_ON)
-    `uvm_field_int (pready,                   UVM_ALL_ON)
     `uvm_field_int (pslverr,                  UVM_ALL_ON)
     `uvm_field_int (wait_cycles,              UVM_ALL_ON)
   `uvm_object_utils_end

@@ -30,11 +30,6 @@ module apb_tb_top;
 
   initial begin
     vif.prstn = 1'b0;
-    vif.psel = 1'b0;
-    vif.penable = 1'b0;
-    vif.pwrite = 1'b0;
-    vif.paddr = '0;
-    vif.pwdata = '0;
     repeat (3) @(posedge pclk);
     vif.prstn = 1'b1;
   end
@@ -42,36 +37,6 @@ module apb_tb_top;
   initial begin
     uvm_config_db#(virtual apb_if)::set(null, "*", "vif", vif);
     run_test();
-  end
-
-  final begin
-    apb_base_test test;
-    test = apb_base_test::test;
-    if (test != null) begin
-      if ((test.env_h.scoreboard_h.fail_cnt == 0) &&
-          (test.env_h.scoreboard_h.pass_cnt > 0)) begin
-        $display(" ==========    ==========   ==========   ========== ");
-        $display(" =        =    =        =   =            =          ");
-        $display(" =        =    =        =   =            =          ");
-        $display(" ==========    ==========   ==========   ========== ");
-        $display(" =             =        =            =            = ");
-        $display(" =             =        =            =            = ");
-        $display(" =             =        =            =            = ");
-        $display(" =             =        =   ==========   ========== ");
-      end else begin
-        $display(" ==========   ==========    ==========   =          ");
-        $display(" =            =        =        =        =          ");
-        $display(" =            =        =        =        =          ");
-        $display(" ==========   ==========        =        =          ");
-        $display(" =            =        =        =        =          ");
-        $display(" =            =        =        =        =          ");
-        $display(" =            =        =        =        =         ");
-        $display(" =            =        =    ==========   ===========");
-      end
-      $display("Pass_cnt = %0d", test.env_h.scoreboard_h.pass_cnt);
-      $display("Fail_cnt = %0d", test.env_h.scoreboard_h.fail_cnt);
-      test.env_h.cov.report();
-    end
   end
 
   initial begin

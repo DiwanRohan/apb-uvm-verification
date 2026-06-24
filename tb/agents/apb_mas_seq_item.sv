@@ -12,6 +12,17 @@ class apb_mas_seq_item extends apb_seq_item_base;
                  [`DEPTH : `DEPTH+3  ] :/ 30 };
   }
 
+  constraint pwdata_c {
+    pwdata dist {
+      '0                                                            :/ 10,
+      [1 : ({`DATA_WIDTH{1'b1}}>>2)]                                :/ 20,
+      [(({`DATA_WIDTH{1'b1}}>>2)+1) : ({`DATA_WIDTH{1'b1}}>>1)]       :/ 20,
+      [(({`DATA_WIDTH{1'b1}}>>1)+1) : (({`DATA_WIDTH{1'b1}}>>1)+({`DATA_WIDTH{1'b1}}>>2)+1)] :/ 20,
+      [((({`DATA_WIDTH{1'b1}}>>1)+({`DATA_WIDTH{1'b1}}>>2)+1)+1) : ({`DATA_WIDTH{1'b1}}-1)] :/ 20,
+      {`DATA_WIDTH{1'b1}}                                           :/ 10
+    };
+  }
+
   `uvm_object_utils(apb_mas_seq_item)
 
   function new(string name = "apb_mas_seq_item");
