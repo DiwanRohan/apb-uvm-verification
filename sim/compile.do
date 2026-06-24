@@ -17,6 +17,7 @@ vlog -sv -timescale 1ns/1ps -L mtiUvm \
   +incdir+../tb/env \
   +incdir+../tb/tests \
   ../tb/interfaces/apb_if.sv \
+  ../tb/interfaces/apb_assertions.sv \
   ../rtl/apb_slave.sv \
   ../tb/agents/agent_pkg.sv \
   ../tb/sequences/apb_seq_pkg.sv \
