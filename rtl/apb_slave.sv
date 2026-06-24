@@ -18,7 +18,7 @@ module apb_slave (
 
   logic [`DATA_WIDTH-1:0] mem [`DEPTH];
   logic                   wait_active;
-  int unsigned            wait_cnt;
+  logic [3:0]             wait_cnt;
 
   always_ff @(posedge pclk or negedge prstn) begin
     integer i;
@@ -33,7 +33,7 @@ module apb_slave (
 
   always_comb begin
     prdata = '0;
-    if (prstn && psel && penable && pready && !pwrite && (paddr < `DEPTH))
+    if (psel && penable && pready && !pwrite && (paddr < `DEPTH))
       prdata = mem[paddr];
   end
 
