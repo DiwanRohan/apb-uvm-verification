@@ -1,42 +1,11 @@
-class apb_slv_mon extends uvm_monitor;
+// Slave-side monitor.  Observes APB signals through the slave monitor
+// modport and emits apb_slv_seq_item transactions on item_collect_port.
+// All monitoring logic is in the parameterised base class apb_base_mon.
+class apb_slv_mon extends apb_base_mon #(apb_slv_seq_item);
   `uvm_component_utils(apb_slv_mon)
-
-  virtual apb_if.SLV_MON_MP vif;
-  uvm_analysis_port #(apb_slv_seq_item) item_collect_port;
 
   function new(string name = "apb_slv_mon", uvm_component parent = null);
     super.new(name, parent);
-    item_collect_port = new("item_collect_port", this);
   endfunction
 
-  task run_phase(uvm_phase phase);
-    forever begin
-      @(vif.mon_cb);
-      if (vif.mon_cb.prstn && vif.mon_cb.psel && !vif.mon_cb.penable)
-        collect_transfer();
-    end
-  endtask
-
-  task collect_transfer();
-    apb_slv_seq_item item;
-    item = apb_slv_seq_item::type_id::create("item");
-    item.kind_e = vif.mon_cb.pwrite ? WRITE : READ;
-    item.paddr  = vif.mon_cb.paddr;
-    item.pwdata = vif.mon_cb.pwdata;
-
-    @(vif.mon_cb);
-    while (vif.mon_cb.psel && vif.mon_cb.penable &&
-           vif.mon_cb.pready !== 1'b1) begin
-      item.wait_cycles++;
-      @(vif.mon_cb);
-    end
-
-    if (vif.mon_cb.psel && vif.mon_cb.penable) begin
-      item.pready  = vif.mon_cb.pready;
-      item.pslverr = vif.mon_cb.pslverr;
-      item.prdata  = vif.mon_cb.prdata;
-      item_collect_port.write(item);
-      `uvm_info("SLV_MON", {"captured ", item.sprint()}, UVM_HIGH)
-    end
-  endtask
 endclass

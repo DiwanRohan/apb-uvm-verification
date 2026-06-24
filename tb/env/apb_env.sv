@@ -4,7 +4,6 @@ class apb_env extends uvm_env;
   apb_mas_agent  mas_agent_h;
   apb_slv_agent  slv_agent_h;
   apb_scoreboard scoreboard_h;
-  apb_scoreboard scb;
   apb_coverage   cov;
 
   function new(string name = "apb_env", uvm_component parent = null);
@@ -22,7 +21,6 @@ class apb_env extends uvm_env;
     mas_agent_h = apb_mas_agent::type_id::create("mas_agent_h", this);
     slv_agent_h = apb_slv_agent::type_id::create("slv_agent_h", this);
     scoreboard_h = apb_scoreboard::type_id::create("scoreboard_h", this);
-    scb = scoreboard_h;
     cov = apb_coverage::type_id::create("cov", this);
   endfunction
 

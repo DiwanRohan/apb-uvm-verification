@@ -18,7 +18,7 @@ module apb_slave (
 
   logic [`DATA_WIDTH-1:0] mem [`DEPTH];
   logic                   wait_active;
-  integer                 wait_cnt;
+  int unsigned            wait_cnt;   // Was 'integer' (signed) — now unsigned
   logic                   inject_wait;
 
   // Inject one deterministic wait-state transfer so the basic test exercises

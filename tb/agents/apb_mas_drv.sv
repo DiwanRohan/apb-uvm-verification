@@ -8,8 +8,13 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
   endfunction
 
   task run_phase(uvm_phase phase);
+    // Drive all outputs to a known idle state before the first clock edge.
+    // Clocking-block outputs driven via '<=' are scheduled for the next
+    // clocking event regardless of when the drive is issued, so this is
+    // safe to call at time 0.
     drive_idle();
 
+    // Wait for reset de-assertion before accepting transactions.
     do @(vif.mas_drv_cb);
     while (vif.mas_drv_cb.prstn !== 1'b1);
 
@@ -29,27 +34,34 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
   endtask
 
   task drive_transfer(apb_mas_seq_item trans);
-    // SETUP phase
+    // Use a local counter so we do not mutate the shared sequence item
+    // during the wait-state loop.
+    int unsigned w_cnt = 0;
+
+    // --- SETUP phase ---
     vif.mas_drv_cb.psel    <= 1'b1;
     vif.mas_drv_cb.penable <= 1'b0;
     vif.mas_drv_cb.pwrite  <= (trans.kind_e == WRITE);
     vif.mas_drv_cb.paddr   <= trans.paddr;
     vif.mas_drv_cb.pwdata  <= trans.pwdata;
 
-    // ACCESS phase
+    // --- ACCESS phase ---
+    // APB spec: PENABLE asserted one cycle after PSEL.
     @(vif.mas_drv_cb);
     vif.mas_drv_cb.penable <= 1'b1;
 
-    // The APB controls remain unchanged until the slave completes the access.
+    // Hold all control signals until the slave completes the access.
     do begin
       @(vif.mas_drv_cb);
       if (vif.mas_drv_cb.pready !== 1'b1)
-        trans.wait_cycles++;
+        w_cnt++;
     end while (vif.mas_drv_cb.pready !== 1'b1);
 
-    trans.pready  = vif.mas_drv_cb.pready;
-    trans.pslverr = vif.mas_drv_cb.pslverr;
-    trans.prdata  = vif.mas_drv_cb.prdata;
+    // Record wait count and response in the item once, after completion.
+    trans.wait_cycles = w_cnt;
+    trans.pready      = vif.mas_drv_cb.pready;
+    trans.pslverr     = vif.mas_drv_cb.pslverr;
+    trans.prdata      = vif.mas_drv_cb.prdata;
 
     `uvm_info("MAS_DRV",
       $sformatf("completed %s addr=0x%0h wait=%0d err=%0b",

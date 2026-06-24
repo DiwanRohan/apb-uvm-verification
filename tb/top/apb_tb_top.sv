@@ -48,7 +48,8 @@ module apb_tb_top;
     apb_base_test test;
     test = apb_base_test::test;
     if (test != null) begin
-      if ((test.env.scb.fail_cnt == 0) && (test.env.scb.pass_cnt > 0)) begin
+      if ((test.env_h.scoreboard_h.fail_cnt == 0) &&
+          (test.env_h.scoreboard_h.pass_cnt > 0)) begin
         $display(" ==========    ==========   ==========   ========== ");
         $display(" =        =    =        =   =            =          ");
         $display(" =        =    =        =   =            =          ");
@@ -67,9 +68,9 @@ module apb_tb_top;
         $display(" =            =        =        =        =         ");
         $display(" =            =        =    ==========   ===========");
       end
-      $display("Pass_cnt = %0d", test.env.scb.pass_cnt);
-      $display("Fail_cnt = %0d", test.env.scb.fail_cnt);
-      test.env.cov.report();
+      $display("Pass_cnt = %0d", test.env_h.scoreboard_h.pass_cnt);
+      $display("Fail_cnt = %0d", test.env_h.scoreboard_h.fail_cnt);
+      test.env_h.cov.report();
     end
   end
 

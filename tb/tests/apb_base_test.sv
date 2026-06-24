@@ -5,7 +5,7 @@ class apb_base_test extends uvm_test;
   static apb_base_test test;
 
   apb_env env_h;
-  apb_env env;
+
 
   function new(string name="apb_base_test",
                uvm_component parent=null);
@@ -17,7 +17,6 @@ class apb_base_test extends uvm_test;
 
     test = this;
     env_h = apb_env::type_id::create("env_h",this);
-    env = env_h;
   endfunction
 
 endclass
