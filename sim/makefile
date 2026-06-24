@@ -35,6 +35,7 @@ regression: compile
 	$(VSIM) -c -do "vsim -nodpiexports -coverage -voptargs=+acc +UVM_NO_RELNOTES +UVM_TESTNAME=apb_random_test +ntb_random_seed=$(SEED) work.$(TOP); coverage save -onexit cov_random.ucdb; run -all"
 	vcover merge merged.ucdb cov_sanity.ucdb cov_write.ucdb cov_read.ucdb cov_waitstate.ucdb cov_random.ucdb
 	vcover report -detail merged.ucdb
+	vcover report -html -output merged_cov_html merged.ucdb
 
 gui:
 	$(VSIM) -do "do compile.do; vsim -nodpiexports -voptargs=+acc +UVM_NO_RELNOTES +UVM_TESTNAME=$(TEST) +ntb_random_seed=$(SEED) work.$(TOP)"

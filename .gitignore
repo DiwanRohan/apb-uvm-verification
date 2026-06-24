@@ -5,6 +5,7 @@ sim/modelsim.ini
 sim/*.wlf
 sim/*.ucdb
 sim/cov_html/
+sim/merged_cov_html/
 
 # Common waveform databases
 *.vcd
