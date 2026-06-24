@@ -1,0 +1,17 @@
+# QuestaSim generated files
+sim/work/
+sim/transcript
+sim/modelsim.ini
+sim/*.wlf
+sim/*.ucdb
+sim/cov_html/
+
+# Common waveform databases
+*.vcd
+*.vpd
+*.fsdb
+
+# Editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db

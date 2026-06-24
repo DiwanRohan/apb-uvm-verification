@@ -1,35 +1,14 @@
-# ==================================================
-# APB UVM Verification Makefile
-# ==================================================
-
 VSIM = vsim
-VLOG = vlog
-
 TOP  = apb_tb_top
+TEST ?= apb_sanity_test
 
-# Default Test
-TEST = apb_sanity_test
-
-# ==================================================
-# Compile
-# ==================================================
+.PHONY: compile run sanity random write read gui cov clean help
 
 compile:
 	$(VSIM) -c -do "do compile.do; quit -f"
 
-# ==================================================
-# Run Default Test
-# ==================================================
-
 run:
-	$(VSIM) -c -do "do compile.do; \
-	vsim -voptargs=+acc +UVM_TESTNAME=$(TEST) work.$(TOP); \
-	run -all; \
-	quit -f"
-
-# ==================================================
-# Individual Tests
-# ==================================================
+	$(VSIM) -c -do "do compile.do; vsim -nodpiexports +UVM_NO_RELNOTES +UVM_TESTNAME=$(TEST) work.$(TOP); run -all; quit -f"
 
 sanity:
 	$(MAKE) run TEST=apb_sanity_test
@@ -43,47 +22,19 @@ write:
 read:
 	$(MAKE) run TEST=apb_read_test
 
-# ==================================================
-# GUI Mode
-# ==================================================
-
 gui:
-	$(VSIM) -do "do compile.do; \
-	vsim -voptargs=+acc +UVM_TESTNAME=$(TEST) work.$(TOP)"
-
-# ==================================================
-# Coverage
-# ==================================================
+	$(VSIM) -do "do compile.do; vsim -nodpiexports -voptargs=+acc +UVM_NO_RELNOTES +UVM_TESTNAME=$(TEST) work.$(TOP)"
 
 cov:
-	$(VSIM) -c -do "do compile.do; \
-	vsim -coverage +UVM_TESTNAME=$(TEST) work.$(TOP); \
-	run -all; \
-	coverage save apb.ucdb; \
-	quit -f"
-
-# ==================================================
-# Clean
-# ==================================================
+	$(VSIM) -c -do "do compile.do; vsim -nodpiexports -coverage +UVM_NO_RELNOTES +UVM_TESTNAME=$(TEST) work.$(TOP); run -all; coverage save apb.ucdb; quit -f"
 
 clean:
-	rm -rf work
-	rm -rf transcript
-	rm -rf *.wlf
-	rm -rf *.ucdb
-	rm -rf modelsim.ini
-
-# ==================================================
-# Help
-# ==================================================
+	rm -rf work transcript *.wlf *.ucdb modelsim.ini
 
 help:
 	@echo "make compile"
-	@echo "make run"
-	@echo "make sanity"
-	@echo "make random"
-	@echo "make write"
-	@echo "make read"
-	@echo "make gui"
-	@echo "make cov"
+	@echo "make run TEST=apb_sanity_test"
+	@echo "make sanity | random | write | read"
+	@echo "make gui TEST=apb_sanity_test"
+	@echo "make cov TEST=apb_sanity_test"
 	@echo "make clean"

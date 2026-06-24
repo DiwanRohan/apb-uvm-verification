@@ -4,126 +4,77 @@
 `include "apb_defines.sv"
 
 module apb_slave (
-
-    input logic pclk,
-    input logic prstn,
-
-    input logic psel,
-    input logic penable,
-
-    input logic [`ADDR_WIDTH-1:0] paddr,
-    input logic                   pwrite,
-    input logic [`DATA_WIDTH-1:0] pwdata,
-
-    output logic                   pready,
-    output logic [`DATA_WIDTH-1:0] prdata,
-    output logic                   pslverr
+  input  logic                   pclk,
+  input  logic                   prstn,
+  input  logic                   psel,
+  input  logic                   penable,
+  input  logic [`ADDR_WIDTH-1:0] paddr,
+  input  logic                   pwrite,
+  input  logic [`DATA_WIDTH-1:0] pwdata,
+  output logic                   pready,
+  output logic [`DATA_WIDTH-1:0] prdata,
+  output logic                   pslverr
 );
 
-  //MEMORY
-  logic [`DATA_WIDTH-1:0] mem[`DEPTH];
+  logic [`DATA_WIDTH-1:0] mem [`DEPTH];
+  logic                   wait_active;
+  integer                 wait_cnt;
+  logic                   inject_wait;
 
-  //WAIT STATE CONTROL
-  logic wait_active;
-
-  integer wait_cnt;
-
-  //WAIT INJECTION
-  logic inject_wait;
-
-  //CUSTOM WAIT INJECTION
-  integer INJECT_WAIT_AT;
-
+  // Inject one deterministic wait-state transfer so the basic test exercises
+  // the driver's PREADY handling. This is test-DUT behavior, not synthesizable RTL.
   initial begin
-
     inject_wait = 1'b0;
-
     #`INJECT_WAIT_AT;
     inject_wait = 1'b1;
-    #2;
-
-    @(posedge pclk);
+    @(negedge pclk);
     inject_wait = 1'b0;
-
   end
 
-  //WRITE
   always_ff @(posedge pclk or negedge prstn) begin
-
     integer i;
-
     if (!prstn) begin
-
-      for (i = 0; i < `DEPTH; i++) mem[i] <= 'x;
-
-    end else if (psel && penable && pready && pwrite && (paddr < `DEPTH)) mem[paddr] <= pwdata;
-
-  end
-
-  //READ
-  always_comb begin
-
-    if (!prstn) prdata = 'x;
-
-    else if (psel && penable && pready && !pwrite && (paddr < `DEPTH)) prdata = mem[paddr];
-
-    else prdata = 'x;
-
-  end
-
-  //PREADY GENERATION
-  always_comb begin
-
-    //DEFAULT
-    pready = `DEFAULT_PREADY;
-
-    //ACCESS PHASE ONLY
-    if (psel && penable) begin
-
-      // WAIT STATE ACTIVE
-      if (wait_active) pready = 1'b0;
-
-      //READY
-      else
-        pready = 1'b1;
-
+      for (i = 0; i < `DEPTH; i++)
+        mem[i] <= '0;
+    end
+    else if (psel && penable && pready && pwrite && (paddr < `DEPTH)) begin
+      mem[paddr] <= pwdata;
     end
   end
 
-  //WAIT STATE CONTROL
-  always_ff @(posedge pclk or negedge prstn) begin
+  always_comb begin
+    prdata = '0;
+    if (prstn && psel && penable && pready && !pwrite && (paddr < `DEPTH))
+      prdata = mem[paddr];
+  end
 
+  always_comb begin
+    pready = `DEFAULT_PREADY;
+    if (psel && penable && wait_active)
+      pready = 1'b0;
+  end
+
+  always_ff @(posedge pclk or negedge prstn) begin
     if (!prstn) begin
       wait_active <= 1'b0;
       wait_cnt    <= 0;
-    end else begin
-
-      //START WAIT
-      if (psel && !penable && inject_wait && !wait_active) begin
-
-        wait_active <= 1'b1;
-        wait_cnt    <= `WAIT_CNT;
-
-      end  //COUNT WAIT CYCLES
-      else if (wait_active && psel && penable) begin
-
-        if (wait_cnt > 1) wait_cnt <= wait_cnt - 1;
-
-        else begin
-          wait_cnt    <= 0;
-          wait_active <= 1'b0;
-        end
+    end
+    else if (psel && !penable && inject_wait && !wait_active) begin
+      wait_active <= 1'b1;
+      wait_cnt    <= `WAIT_CNT;
+    end
+    else if (wait_active && psel && penable) begin
+      if (wait_cnt > 1)
+        wait_cnt <= wait_cnt - 1;
+      else begin
+        wait_cnt    <= 0;
+        wait_active <= 1'b0;
       end
     end
   end
 
-  //PSLVERR
   always_comb begin
-
-    pslverr = 1'b0;
-
-    if (psel && penable && (paddr >= `DEPTH)) pslverr = 1'b1;
-
+    pslverr = psel && penable && pready && (paddr >= `DEPTH);
   end
 
 endmodule
