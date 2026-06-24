@@ -12,6 +12,9 @@ module apb_tb_top;
 
   apb_if vif(pclk);
 
+  // Bind assertions module to the apb_if interface
+  bind apb_if apb_assertions_if apb_assert_inst (.*);
+
   apb_slave dut (
     .pclk    (pclk),
     .prstn   (vif.prstn),
@@ -39,6 +42,40 @@ module apb_tb_top;
   initial begin
     uvm_config_db#(virtual apb_if)::set(null, "*", "vif", vif);
     run_test();
+  end
+
+  final begin
+    apb_base_test test;
+    test = apb_base_test::test;
+    if (test != null) begin
+      if ((test.env.scb.fail_cnt == 0) && (test.env.scb.pass_cnt > 0)) begin
+        $display(" ==========    ==========   ==========   ========== ");
+        $display(" =        =    =        =   =            =          ");
+        $display(" =        =    =        =   =            =          ");
+        $display(" ==========    ==========   ==========   ========== ");
+        $display(" =             =        =            =            = ");
+        $display(" =             =        =            =            = ");
+        $display(" =             =        =            =            = ");
+        $display(" =             =        =   ==========   ========== ");
+      end else begin
+        $display(" ==========   ==========    ==========   =          ");
+        $display(" =            =        =        =        =          ");
+        $display(" =            =        =        =        =          ");
+        $display(" ==========   ==========        =        =          ");
+        $display(" =            =        =        =        =          ");
+        $display(" =            =        =        =        =          ");
+        $display(" =            =        =        =        =         ");
+        $display(" =            =        =    ==========   ===========");
+      end
+      $display("Pass_cnt = %0d", test.env.scb.pass_cnt);
+      $display("Fail_cnt = %0d", test.env.scb.fail_cnt);
+      test.env.cov.report();
+    end
+  end
+
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars();
   end
 
 endmodule

@@ -16,6 +16,9 @@ class apb_scoreboard extends uvm_scoreboard;
   int unsigned error_count;
   int unsigned compared_count;
 
+  int fail_cnt;
+  int pass_cnt;
+
   function new(string name = "apb_scoreboard", uvm_component parent = null);
     super.new(name, parent);
   endfunction
@@ -128,5 +131,10 @@ class apb_scoreboard extends uvm_scoreboard;
     `uvm_info("SB_REPORT", $sformatf(
       "writes=%0d reads=%0d monitor_pairs=%0d errors=%0d",
       write_count, read_count, compared_count, error_count), UVM_NONE)
+    fail_cnt = error_count;
+    if (compared_count > error_count)
+      pass_cnt = compared_count - error_count;
+    else
+      pass_cnt = 0;
   endfunction
 endclass

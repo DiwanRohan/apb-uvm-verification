@@ -6,5 +6,6 @@ package apb_pkg;
   import agent_pkg::*;
 
   `include "apb_scoreboard.sv"
+  `include "apb_coverage.sv"
   `include "apb_env.sv"
 endpackage
