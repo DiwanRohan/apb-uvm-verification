@@ -1,14 +1,12 @@
-// Parameterised base monitor shared by the master and slave agents.
-// All APB protocol monitoring logic lives here; derived classes select
-// the concrete seq-item type (T) and register with the UVM factory.
-class apb_base_mon #(type T = apb_seq_item_base) extends uvm_monitor;
+// APB master monitor — captures every completed APB transfer from the bus.
+class apb_mas_mon extends uvm_monitor;
 
-  `uvm_component_param_utils(apb_base_mon #(T))
+  `uvm_component_utils(apb_mas_mon)
 
-  virtual apb_if         vif;
-  uvm_analysis_port #(T) item_collect_port;
+  virtual apb_if                        vif;
+  uvm_analysis_port #(apb_mas_seq_item) item_collect_port;
 
-  function new(string name, uvm_component parent);
+  function new(string name = "apb_mas_mon", uvm_component parent = null);
     super.new(name, parent);
     item_collect_port = new("item_collect_port", this);
   endfunction
@@ -25,8 +23,8 @@ class apb_base_mon #(type T = apb_seq_item_base) extends uvm_monitor;
 
   // -------------------------------------------------------- collect_transfer
   task collect_transfer();
-    T item;
-    item = T::type_id::create("item");
+    apb_mas_seq_item item;
+    item = apb_mas_seq_item::type_id::create("item");
 
     // Capture SETUP-phase signals.
     item.kind_e = vif.mon_cb.pwrite ? WRITE : READ;
