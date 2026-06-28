@@ -23,6 +23,14 @@ class apb_mas_seq_item extends apb_seq_item_base;
     };
   }
 
+  constraint pstrb_c {
+    if (kind_e == READ) {
+      pstrb == '0;
+    } else {
+      pstrb inside {[1 : (1 << (`DATA_WIDTH/8)) - 1]};
+    }
+  }
+
   `uvm_object_utils(apb_mas_seq_item)
 
   function new(string name = "apb_mas_seq_item");

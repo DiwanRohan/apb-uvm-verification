@@ -54,6 +54,7 @@ class apb_scoreboard extends uvm_scoreboard;
       if (mas_item.kind_e      != slv_item.kind_e      ||
           mas_item.paddr       != slv_item.paddr       ||
           mas_item.pwdata      != slv_item.pwdata      ||
+          mas_item.pstrb       != slv_item.pstrb       ||
           mas_item.prdata      != slv_item.prdata      ||
           mas_item.pslverr     != slv_item.pslverr     ||
           mas_item.wait_cycles != slv_item.wait_cycles) begin
@@ -92,9 +93,13 @@ class apb_scoreboard extends uvm_scoreboard;
     case (item.kind_e)
       WRITE: begin
         write_count++;
-        ref_mem[item.paddr] = item.pwdata;
-        `uvm_info("SB", $sformatf("WRITE PASS addr=0x%0h data=0x%0h",
-          item.paddr, item.pwdata), UVM_LOW)
+        for (int i = 0; i < `DATA_WIDTH/8; i++) begin
+          if (item.pstrb[i]) begin
+            ref_mem[item.paddr][i*8 +: 8] = item.pwdata[i*8 +: 8];
+          end
+        end
+        `uvm_info("SB", $sformatf("WRITE PASS addr=0x%0h data=0x%0h pstrb=0x%0h",
+          item.paddr, item.pwdata, item.pstrb), UVM_LOW)
       end
 
       READ: begin

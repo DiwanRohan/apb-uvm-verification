@@ -8,6 +8,7 @@ class apb_seq_item_base extends uvm_sequence_item;
   rand trans_kind_e          kind_e;      // READ or WRITE
   rand bit [`ADDR_WIDTH-1:0] paddr;       // APB address
   rand bit [`DATA_WIDTH-1:0] pwdata;      // Write data
+  rand bit [(`DATA_WIDTH/8)-1:0] pstrb;   // Byte strobe
 
   // Response / output fields - populated by the driver/monitor, never rand.
   bit [`DATA_WIDTH-1:0]      prdata;      // Read data returned by DUT
@@ -18,6 +19,7 @@ class apb_seq_item_base extends uvm_sequence_item;
     `uvm_field_enum(trans_kind_e, kind_e,     UVM_ALL_ON)
     `uvm_field_int (paddr,                    UVM_ALL_ON)
     `uvm_field_int (pwdata,                   UVM_ALL_ON)
+    `uvm_field_int (pstrb,                    UVM_ALL_ON)
     `uvm_field_int (prdata,                   UVM_ALL_ON)
     `uvm_field_int (pslverr,                  UVM_ALL_ON)
     `uvm_field_int (wait_cycles,              UVM_ALL_ON)

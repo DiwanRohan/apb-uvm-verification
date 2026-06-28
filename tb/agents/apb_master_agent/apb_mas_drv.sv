@@ -31,6 +31,7 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
     vif.mas_drv_cb.pwrite  <= 1'b0;
     vif.mas_drv_cb.paddr   <= '0;
     vif.mas_drv_cb.pwdata  <= '0;
+    vif.mas_drv_cb.pstrb   <= '0;
   endtask
 
   task drive_transfer(apb_mas_seq_item trans);
@@ -44,6 +45,7 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
     vif.mas_drv_cb.pwrite  <= (trans.kind_e == WRITE);
     vif.mas_drv_cb.paddr   <= trans.paddr;
     vif.mas_drv_cb.pwdata  <= trans.pwdata;
+    vif.mas_drv_cb.pstrb   <= trans.pstrb;
 
     // --- ACCESS phase ---
     // APB spec: PENABLE asserted one cycle after PSEL.
@@ -67,6 +69,6 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
         trans.kind_e.name(), trans.paddr, trans.wait_cycles, trans.pslverr),
       UVM_MEDIUM)
 
-    drive_idle();
+    //drive_idle();
   endtask
 endclass

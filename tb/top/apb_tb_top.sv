@@ -23,6 +23,7 @@ module apb_tb_top;
     .paddr   (vif.paddr),
     .pwrite  (vif.pwrite),
     .pwdata  (vif.pwdata),
+    .pstrb   (vif.pstrb),
     .pready  (vif.pready),
     .prdata  (vif.prdata),
     .pslverr (vif.pslverr)

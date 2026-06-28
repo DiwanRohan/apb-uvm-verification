@@ -32,6 +32,7 @@ class apb_base_mon #(type T = apb_seq_item_base) extends uvm_monitor;
     item.kind_e = vif.mon_cb.pwrite ? WRITE : READ;
     item.paddr  = vif.mon_cb.paddr;
     item.pwdata = vif.mon_cb.pwdata;
+    item.pstrb  = vif.mon_cb.pstrb;
 
     // Advance to ACCESS phase.
     @(vif.mon_cb);

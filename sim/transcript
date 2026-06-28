@@ -1,7 +1,43 @@
-# vsim -nodpiexports -coverage -voptargs=+acc +UVM_NO_RELNOTES +UVM_TESTNAME=apb_random_test +ntb_random_seed=random work.apb_tb_top
-# vsim -nodpiexports -coverage -voptargs="+acc" "+UVM_NO_RELNOTES" "+UVM_TESTNAME=apb_random_test" "+ntb_random_seed=random" work.apb_tb_top 
-# Start time: 00:27:45 on Jun 25,2026
-# ** Note: (vsim-8009) Loading existing optimized design _opt
+# do compile.do
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt".  Locker is Devansh@LAPTOP-Q3INBJGJ.
+# ** Warning: (vdel-134) Unable to remove locked optimized design "_opt1".  Locker is Devansh@LAPTOP-Q3INBJGJ.
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# QuestaSim-64 vmap 2024.1 Lib Mapping Utility 2024.02 Feb  1 2024
+# vmap work work 
+# Modifying modelsim.ini
+# C:/questasim64_2024.1
+# C:/questasim64_2024.1/verilog_src/uvm-1.2/src
+# QuestaSim-64 vmap 2024.1 Lib Mapping Utility 2024.02 Feb  1 2024
+# vmap mtiUvm C:/questasim64_2024.1/uvm-1.2 
+# Modifying modelsim.ini
+# QuestaSim-64 vlog 2024.1 Compiler 2024.02 Feb  1 2024
+# Start time: 13:49:47 on Jun 28,2026
+# vlog -cover sbect -sv -timescale 1ns/1ps -L mtiUvm "+incdir+C:/questasim64_2024.1/verilog_src/uvm-1.2/src" "+incdir+../tb" "+incdir+../tb/interfaces" "+incdir+../tb/agent" "+incdir+../tb/sequences" "+incdir+../tb/env" "+incdir+../tb/tests" ../tb/interfaces/apb_if.sv ../tb/interfaces/apb_assertions.sv ../rtl/apb_slave.sv ../tb/agent/agent_pkg.sv ../tb/sequences/apb_seq_pkg.sv ../tb/apb_pkg.sv ../tb/tests/apb_test_pkg.sv ../tb/top/apb_tb_top.sv 
+# -- Compiling interface apb_if
+# -- Compiling interface apb_assertions_if
+# -- Compiling module apb_slave
+# -- Compiling package agent_pkg
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.2 Built-in)
+# -- Compiling package apb_seq_pkg
+# -- Importing package agent_pkg
+# -- Compiling package apb_pkg
+# -- Compiling package apb_test_pkg
+# -- Importing package apb_seq_pkg
+# -- Importing package apb_pkg
+# -- Compiling module apb_tb_top
+# -- Importing package apb_test_pkg
+# 
+# Top level modules:
+# 	apb_tb_top
+# End time: 13:49:47 on Jun 28,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+#  vsim -nodpiexports +UVM_NO_RELNOTES +UVM_TESTNAME=apb_sanity_test +ntb_random_seed=random work.apb_tb_top
+# vsim -nodpiexports "+UVM_NO_RELNOTES" "+UVM_TESTNAME=apb_sanity_test" "+ntb_random_seed=random" work.apb_tb_top 
+# Start time: 13:49:47 on Jun 28,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
 # //  Questa Sim-64
 # //  Version 2024.1 win64 Feb  1 2024
 # //
@@ -25,176 +61,25 @@
 # Loading work.apb_test_pkg(fast)
 # Loading mtiUvm.questa_uvm_pkg(fast)
 # Loading work.apb_tb_top(fast)
-# Loading work.apb_if(fast__2)
-# Loading work.apb_assertions_if(fast__2)
-# Loading work.apb_slave(fast)
 # Loading C:/questasim64_2024.1/uvm-1.2\win64\uvm_dpi.dll
-#  coverage save -onexit cov_random.ucdb
 #  run -all
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
 # UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# UVM_INFO @ 0: reporter [RNTST] Running test apb_random_test...
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 55000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x0 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 55000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x0 data=0x8dd7266
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 55000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x0
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 85000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x1 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 85000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x1 data=0x7549a2
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 85000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x1
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 135000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x2 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 135000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x2 data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 135000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x2
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 275000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x3 wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 275000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x3 data=0x73f0e35e
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 275000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x3
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 295000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x4 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 295000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x4 data=0x9577fa4f
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 295000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x4
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 325000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x5 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 325000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x5 data=0xcd40c9dd
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 325000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x5
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 375000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x6 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 375000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x6 data=0x391fedb0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 375000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x6
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 515000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x7 wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 515000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x7 data=0xd22b2d52
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 515000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x7
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 535000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x8 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 535000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x8 data=0x93c2b65d
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 535000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x8
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 565000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x9 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 565000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x9 data=0x82024bee
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 565000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x9
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 615000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xa wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 615000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xa data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 615000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xa
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 755000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xb wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 755000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xb data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 755000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xb
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 775000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xc wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 775000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xc data=0x246aad41
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 775000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xc
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 805000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xd wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 805000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xd data=0x51f8e38e
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 805000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xd
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 855000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xe wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 855000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xe data=0xa3d9eac7
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 855000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xe
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 995000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xf wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 995000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xf data=0x1e95b14
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 995000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xf
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1015000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x0 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1015000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x0 data=0x8dd7266
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1015000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x0
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1045000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x1 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1045000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x1 data=0x7549a2
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1045000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x1
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1095000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x2 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1095000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x2 data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1095000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x2
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1235000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x3 wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1235000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x3 data=0x73f0e35e
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1235000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x3
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1255000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x4 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1255000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x4 data=0x9577fa4f
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1255000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x4
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1285000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x5 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1285000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x5 data=0xcd40c9dd
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1285000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x5
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1335000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x6 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1335000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x6 data=0x391fedb0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1335000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x6
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1475000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x7 wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1475000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x7 data=0xd22b2d52
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1475000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x7
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1495000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x8 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1495000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x8 data=0x93c2b65d
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1495000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x8
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1525000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x9 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1525000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x9 data=0x82024bee
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1525000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x9
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1575000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xa wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1575000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xa data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1575000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xa
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1715000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xb wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1715000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xb data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1715000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xb
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1735000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xc wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1735000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xc data=0x246aad41
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1735000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xc
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1765000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xd wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1765000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xd data=0x51f8e38e
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1765000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xd
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1815000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xe wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1815000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xe data=0xa3d9eac7
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1815000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xe
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1955000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xf wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1955000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xf data=0x1e95b14
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1955000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xf
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 1975000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x4 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 1975000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x4 data=0x9577fa4f
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 1975000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x4
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2115000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xf wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2115000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xf data=0x1e95b14
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2115000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xf
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2135000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x10 wait=0 err=1
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2135000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x10
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2155000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x10 wait=0 err=1
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2155000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x10
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2295000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0xf wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2295000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0xf data=0x1e95b14
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2295000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0xf
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2315000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x0 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 2315000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x0 data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2315000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x0
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2335000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x0 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2335000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x0 data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2335000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x0
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2385000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x6 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2385000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x6 data=0x391fedb0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2385000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x6
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2435000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x6 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 2435000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x6 data=0xfbbd7b96
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2435000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x6
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2485000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x12 wait=3 err=1
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2485000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x12
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2625000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x13 wait=12 err=1
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2625000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x13
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2655000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x5 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 2655000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x5 data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2655000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x5
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2705000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x6 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 2705000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x6 data=0x57b4b5ca
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2705000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x6
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2735000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x1 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 2735000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x1 data=0xffffffff
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2735000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x1
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2755000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x10 wait=0 err=1
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2755000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x10
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2785000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x1 wait=1 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2785000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x1 data=0xffffffff
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2785000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x1
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2835000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x2 wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2835000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x2 data=0x0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2835000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x2
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 2975000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x7 wait=12 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(110) @ 2975000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x7 data=0xd22b2d52
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 2975000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched READ addr=0x7
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 3025000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0xe wait=3 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 3025000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0xe data=0xc5d9ac9a
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 3025000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0xe
-# UVM_INFO ../tb/agents/apb_mas_drv.sv(65) @ 3045000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x4 wait=0 err=0
-# UVM_INFO ../tb/env/apb_scoreboard.sv(96) @ 3045000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x4 data=0xffffffff
-# UVM_INFO ../tb/env/apb_scoreboard.sv(66) @ 3045000: uvm_test_top.env_h.scoreboard_h [SB_MON_COMPARE] both monitors matched WRITE addr=0x4
-# UVM_INFO verilog_src/uvm-1.2/src/base/uvm_objection.svh(1270) @ 3045000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
-# UVM_INFO ../tb/env/apb_coverage.sv(190) @ 3045000: uvm_test_top.env_h.cov [COV_REPORT] 
+# UVM_INFO @ 0: reporter [RNTST] Running test apb_sanity_test...
+# UVM_INFO ../tb/agent/apb_mas_drv.sv(67) @ 65000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed WRITE addr=0x1 wait=1 err=0
+# UVM_INFO ../tb/env/apb_scoreboard.sv(62) @ 65000: uvm_test_top.env_h.scoreboard_h [SB] WRITE PASS addr=0x1 data=0xa5a50001 pstrb=0x5
+# UVM_INFO ../tb/agent/apb_mas_drv.sv(67) @ 95000: uvm_test_top.env_h.mas_agent_h.drv_h [MAS_DRV] completed READ addr=0x1 wait=1 err=0
+# UVM_INFO ../tb/env/apb_scoreboard.sv(75) @ 95000: uvm_test_top.env_h.scoreboard_h [SB] READ PASS addr=0x1 data=0xa50001
+# UVM_INFO verilog_src/uvm-1.2/src/base/uvm_objection.svh(1270) @ 95000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# UVM_INFO ../tb/env/apb_coverage.sv(201) @ 95000: uvm_test_top.env_h.cov [COV_REPORT] 
 # ======================================
-#   FUNCTIONAL COVERAGE = 100.00 %
-#   Transfer coverage   = 100.00 %
-#   Write data coverage = 100.00 %
-#   Read  data coverage = 100.00 %
-#   Samples total/write/read = 52/26/26
+#   FUNCTIONAL COVERAGE = 21.68 %
+#   Transfer coverage   = 31.71 %
+#   Write data coverage = 16.67 %
+#   Read  data coverage = 16.67 %
+#   Samples total/write/read = 2/1/1
 # ======================================
-# UVM_INFO ../tb/env/apb_scoreboard.sv(131) @ 3045000: uvm_test_top.env_h.scoreboard_h [SB_REPORT] writes=23 reads=24 monitor_pairs=52 errors=0
+# UVM_INFO ../tb/env/apb_scoreboard.sv(91) @ 95000: uvm_test_top.env_h.scoreboard_h [SB_REPORT] writes=1 reads=1 transactions=2 errors=0
 #  ==========    ==========   ==========   ========== 
 #  =        =    =        =   =            =          
 #  =        =    =        =   =            =          
@@ -203,36 +88,34 @@
 #  =             =        =            =            = 
 #  =             =        =            =            = 
 #  =             =        =   ==========   ========== 
-# Pass_cnt = 52
+# Pass_cnt = 2
 # Fail_cnt = 0
-# UVM_INFO ../tb/env/apb_coverage.sv(190) @ 3045000: uvm_test_top.env_h.cov [COV_REPORT] 
+# UVM_INFO ../tb/env/apb_coverage.sv(201) @ 95000: uvm_test_top.env_h.cov [COV_REPORT] 
 # ======================================
-#   FUNCTIONAL COVERAGE = 100.00 %
-#   Transfer coverage   = 100.00 %
-#   Write data coverage = 100.00 %
-#   Read  data coverage = 100.00 %
-#   Samples total/write/read = 52/26/26
+#   FUNCTIONAL COVERAGE = 21.68 %
+#   Transfer coverage   = 31.71 %
+#   Write data coverage = 16.67 %
+#   Read  data coverage = 16.67 %
+#   Samples total/write/read = 2/1/1
 # ======================================
-# UVM_INFO verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 3045000: reporter [UVM/REPORT/SERVER] 
+# UVM_INFO verilog_src/uvm-1.2/src/base/uvm_report_server.svh(847) @ 95000: reporter [UVM/REPORT/SERVER] 
 # --- UVM Report Summary ---
 # 
 # ** Report counts by severity
-# UVM_INFO :  158
+# UVM_INFO :   11
 # UVM_WARNING :    0
 # UVM_ERROR :    0
 # UVM_FATAL :    0
 # ** Report counts by id
 # [COV_REPORT]     2
-# [MAS_DRV]    52
+# [MAS_DRV]     2
 # [Questa UVM]     2
 # [RNTST]     1
-# [SB]    47
-# [SB_MON_COMPARE]    52
+# [SB]     2
 # [SB_REPORT]     1
 # [TEST_DONE]     1
 # 
 # ** Note: $finish    : C:/questasim64_2024.1/win64/../verilog_src/uvm-1.2/src/base/uvm_root.svh(517)
-#    Time: 3045 ns  Iteration: 77  Instance: /apb_tb_top
-# Saving coverage database on exit...
-# End time: 00:27:46 on Jun 25,2026, Elapsed time: 0:00:01
+#    Time: 95 ns  Iteration: 76  Instance: /apb_tb_top
+# End time: 13:49:52 on Jun 28,2026, Elapsed time: 0:00:05
 # Errors: 0, Warnings: 0

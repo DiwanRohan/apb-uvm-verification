@@ -15,6 +15,7 @@ interface apb_assertions_if (
   input logic [`ADDR_WIDTH-1:0] paddr,
   input logic [`DATA_WIDTH-1:0] pwdata,
   input logic [`DATA_WIDTH-1:0] prdata,
+  input logic [(`DATA_WIDTH/8)-1:0] pstrb,
   input logic                   pready,
   input logic                   pslverr
 );
@@ -45,7 +46,7 @@ interface apb_assertions_if (
   property controls_stable_during_wait;
     @(posedge pclk) disable iff (!prstn)
       (psel && penable && !pready) |=> (psel && penable &&
-        $stable({paddr, pwrite, pwdata}));
+        $stable({paddr, pwrite, pwdata, pstrb}));
   endproperty
   CONTROLS_STABLE_DURING_WAIT: assert property (controls_stable_during_wait)
     else $error("APB: controls changed during a wait state");
@@ -111,6 +112,16 @@ interface apb_assertions_if (
   endproperty
   ACCESS_FOLLOWS_SETUP_OR_WAIT: assert property (access_follows_setup_or_wait)
     else $error("APB: ACCESS occurred without SETUP or a preceding wait");
+
+  // -----------------------------------------------------------------------
+  // APB4 Rule: PSTRB must be low (all zeros) for READ transfers.
+  // -----------------------------------------------------------------------
+  property pstrb_low_during_read;
+    @(posedge pclk) disable iff (!prstn)
+      (psel && !pwrite) |-> (pstrb == '0);
+  endproperty
+  PSTRB_LOW_DURING_READ: assert property (pstrb_low_during_read)
+    else $error("APB: PSTRB is not zero during a read transfer");
 
 endinterface
 

@@ -21,6 +21,7 @@ class apb_coverage extends uvm_subscriber #(apb_mas_seq_item);
   bit [`DATA_WIDTH-1:0]     sample_prdata;
   bit                       sample_pslverr;
   int unsigned              sample_wait_cycles;
+  bit [(`DATA_WIDTH/8)-1:0] sample_pstrb;
 
   int unsigned total_samples;
   int unsigned write_samples;
@@ -86,8 +87,17 @@ class apb_coverage extends uvm_subscriber #(apb_mas_seq_item);
       bins slv_error   = {1}; // Expected for OOB addresses — NOT illegal
     }
 
-    // Cross: direction × address region.
+    cp_pstrb: coverpoint sample_pstrb {
+      bins zero_strobe   = { '0 };
+      bins all_bytes     = { {(`DATA_WIDTH/8){1'b1}} };
+      bins single_byte[] = { 4'b0001, 4'b0010, 4'b0100, 4'b1000 };
+      bins half_word[]   = { 4'b0011, 4'b1100 };
+      bins other         = default;
+    }
+
+    // Crosses
     cross_kind_addr: cross cp_kind, cp_addr_region;
+    cross_kind_pstrb: cross cp_kind, cp_pstrb;
 
   endgroup
 
@@ -159,6 +169,7 @@ class apb_coverage extends uvm_subscriber #(apb_mas_seq_item);
     sample_prdata      = last_trans.prdata;
     sample_pslverr     = last_trans.pslverr;
     sample_wait_cycles = last_trans.wait_cycles;
+    sample_pstrb       = last_trans.pstrb;
 
     total_samples++;
     apb_transfer_cg.sample();
