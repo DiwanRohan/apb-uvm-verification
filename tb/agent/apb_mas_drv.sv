@@ -12,7 +12,7 @@ class apb_mas_drv extends uvm_driver #(apb_mas_seq_item);
     // Clocking-block outputs driven via '<=' are scheduled for the next
     // clocking event regardless of when the drive is issued, so this is
     // safe to call at time 0.
-    drive_idle();
+    //drive_idle();
 
     // Wait for reset de-assertion before accepting transactions.
     do @(vif.mas_drv_cb);
