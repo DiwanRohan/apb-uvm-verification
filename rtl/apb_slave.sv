@@ -26,7 +26,10 @@ module apb_slave #(
   logic                  wait_active;
   logic [3:0]            wait_cnt;
 
-  // Memory write with byte strobe and reset initialization
+  // --------------------------------------------------------
+  // Memory write block: Handles asynchronous reset initialization 
+  // and synchronous writes using PSTRB for byte-lane granular masking.
+  // --------------------------------------------------------
   always_ff @(posedge pclk or negedge prstn) begin
     if (!prstn) begin
       for (int i = 0; i < DEPTH; i++) begin
@@ -42,14 +45,20 @@ module apb_slave #(
     end
   end
 
-  // Memory read path
+  // --------------------------------------------------------
+  // Memory read block: Combinational read from target address.
+  // Data is safely driven only during the ACCESS phase (PENABLE=1).
+  // --------------------------------------------------------
   always_comb begin
     prdata = '0;
     if (psel && penable && pready && !pwrite && (paddr < DEPTH))
       prdata = mem[paddr];
   end
 
-  // Pready generation (Wait states control)
+  // --------------------------------------------------------
+  // PREADY generation: Controls bus wait-states.
+  // Stalls the master by holding PREADY low when wait_active is set.
+  // --------------------------------------------------------
   always_comb begin
     if (DEFAULT_PREADY) begin
       pready = 1'b1;
@@ -65,7 +74,10 @@ module apb_slave #(
     end
   end
 
-  // Wait counter state machine
+  // --------------------------------------------------------
+  // Wait state counter: State machine that injects synthetic delays 
+  // based on the lower 2 bits of the accessed address.
+  // --------------------------------------------------------
   always_ff @(posedge pclk or negedge prstn) begin
     if (!prstn) begin
       wait_active <= 1'b0;
@@ -102,7 +114,10 @@ module apb_slave #(
     end
   end
 
-  // Slave error generation (Address out-of-bounds)
+  // --------------------------------------------------------
+  // PSLVERR generation: Asserts error response if the master 
+  // attempts to access an out-of-bounds memory address.
+  // --------------------------------------------------------
   always_comb begin
     pslverr = psel && penable && pready && (paddr >= DEPTH);
   end
