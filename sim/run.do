@@ -90,9 +90,9 @@ if {[batch_mode] == 0} {
   run -all
 } else {
   # Run and save coverage when in batch mode
-  run -all
   if {$COVERAGE == 1} {
     coverage save -onexit cov_$TESTNAME.ucdb
   }
+  run -all
   quit -f
 }
